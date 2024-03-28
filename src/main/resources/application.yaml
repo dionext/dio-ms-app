@@ -1,0 +1,85 @@
+management:
+  endpoints:
+    web:
+      base-path: /api/actuator/
+
+# Application info
+info:
+  #name: '@project.name@' #not working
+  #description: '@project.description@' #not working
+  name: 'dioportal'
+  description: 'Dionext.com main site'
+  version: '@project.version@'
+  time: '@maven.build.timestamp@'
+  app:
+    encoding: '@project.build.sourceEncoding@'
+    java:
+      source: '@java.version@'
+      target: '@java.version@'
+
+service:
+  shutdown:
+    graceful
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: "30s"
+  thymeleaf:
+    check-template-location: false # to prevent warning
+logging:
+  level:
+    com:
+      zaxxer:
+        hikari: OFF # suppress errors in log when DatabaseStartupValidator trying to connect to database
+
+
+# Web-sites config
+web-config:
+  website:
+    siteProtocol: "https"
+  multiSites:
+    dioportal:
+      siteLangs: "en"
+      siteLangInPath: true
+      siteDomain: "dionext.com"
+      siteProtocol: "https"
+      siteStaticStoragePath: "file:/mnt/sites/dioportal/input"
+      siteStoragePaths:
+        - "file:/mnt/sites/dioportal/input"
+      siteInternalStoragePaths:
+        - "file:/mnt/sites/dioportal/mediainfo"
+      createMetaOg: true
+      createMetaForIcons: true
+      useExternalUrlForImages: false
+      keywords:
+        key: "dioportal.site.keywords"
+      description:
+        key: "dioportal.site.description"
+      siteTitle:
+        key: "dioportal.site.title"
+      nav:
+        - item:
+          key: "dioportal.menu.home"
+          url: "index.htm"
+        - item:
+          name: "Architecture"
+          url: "index.htm#architecture"
+        - item:
+          name: "Development"
+          url: "index.htm#development"
+        - item:
+          name: "Devops"
+          url: "index.htm#deployment"
+        - item:
+          name: "Maintenance"
+          url: "index.htm#maintenance."
+          subitems:
+            - item:
+              name: "Logging"
+              url: "devops-logging.htm"
+            - item:
+              name: "Monitoring"
+              url: "devops-monitoring.htm"
+        - item:
+          key: "dioportal.menu.about.project"
+          url: "about.htm"
+
