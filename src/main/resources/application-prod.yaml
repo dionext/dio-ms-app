@@ -1,0 +1,7 @@
+logging:
+  config: classpath:${LOGBACK:logback.xml}
+  level:
+    root: info
+    com:
+      dionext: debug
+

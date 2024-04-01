@@ -16,7 +16,8 @@ info:
     java:
       source: '@java.version@'
       target: '@java.version@'
-
+server:
+  port: 8082
 service:
   shutdown:
     graceful

@@ -1,0 +1,16 @@
+logging:
+  config: classpath:${LOGBACK:logback-local.xml}
+  level:
+    root: info
+    com:
+      dionext: debug
+
+web-config:
+  multiSites:
+    dioportal:
+      siteStaticStoragePath: "file:R:/doc/sites/dioportal/input"
+      siteStoragePaths:
+        - "file:R:/doc/sites/dioportal/input"
+      siteInternalStoragePaths:
+        - "file:R:/doc/sites/dioportal/mediainfo"
+
