@@ -64,12 +64,63 @@ web-config:
         - item:
           name: "Architecture"
           url: "index.htm#architecture"
+          subitems:
+            - item:
+              name: "Principles and rules"
+              url: "software-development-principles.htm"
+            - item:
+              name: "Microservices"
+              url: "architecture-microservices.htm"
         - item:
           name: "Development"
           url: "index.htm#development"
+          subitems:
+            - item:
+              name: "Tools"
+              url: "index.htm#tools"
+            - item:
+              name: "Java"
+              url: "index.htm#java"
+            - item:
+              name: "Spring"
+              url: "index.htm#spring"
+            - item:
+              name: "Web"
+              url: "index.htm#web"
+            - item:
+              name: "Texts and Media"
+              url: "index.htm#texts"
+            - item:
+              name: "Data"
+              url: "index.htm#data"
+            - item:
+              name: "Integration"
+              url: "integration-technologies.htm"
+            - item:
+              name: "Testing"
+              url: "testing-and-debugging.htm"
+            - item:
+              name: "Profiling"
+              url: "java-profiling.htm"
         - item:
           name: "Devops"
           url: "index.htm#deployment"
+          subitems:
+            - item:
+              name: "Devops"
+              url: "devops.htm"
+            - item:
+              name: "Remote delivery"
+              url: "devops-remote-operations.htm"
+            - item:
+              name: "Linux"
+              url: "os-linux.htm"
+            - item:
+              name: "Git"
+              url: "devops-git.htm"
+            - item:
+              name: "Runtime"
+              url: "index.htm#runtime"
         - item:
           name: "Maintenance"
           url: "index.htm#maintenance."
@@ -80,6 +131,12 @@ web-config:
             - item:
               name: "Monitoring"
               url: "devops-monitoring.htm"
+        - item:
+          name: "Free products"
+          subitems:
+            - item:
+              name: "Site starter"
+              url: "lib-site-spring-starter.htm"
         - item:
           key: "dioportal.menu.about.project"
           url: "about.htm"
