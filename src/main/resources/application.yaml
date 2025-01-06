@@ -1,9 +1,54 @@
+#management:
+ # endpoints:
+  #  web:
+   #   base-path: /api/actuator/
 management:
+  info:
+    java:
+      enabled: true
+    env:
+      enabled: true
+  health:
+    defaults.enabled: false
+    probes.enabled: true
+    ping.enabled: true
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
   endpoints:
     web:
-      base-path: /api/actuator/
+      base-path: /dioportal/actuator/
+      exposure:
+        include: '*'
+  endpoint:
+    loggers:
+      enabled: true
+    health:
+      enabled: true
+      show-details: always
+      show-components: always
+      #group:
+      #  liveness.include: ["*"]
+      #  readiness.include: ["*"]
+    info.enabled: true
+    mappings.enabled: true
+    prometheus.enabled: true
+    flyway.enabled: true
+  metrics:
+    #export:
+    # elastic:
+    #  host: https://elastic.example.com:8086:
+    # ??????? ?? ??? ???????? ??????? ?? ??????? ? ?????????? ????????
+    # ? ??????? ?????????? (??????? http.server.requests)
+    web.server.request.autotime:
+      enabled: true
+      percentiles-histogram: true
+    web.client.request.autotime:
+      percentiles-histogram: true
+    tags:
+      app: ${info.name}
 
-# Application info
 info:
   #name: '@project.name@' #not working
   #description: '@project.description@' #not working
@@ -18,20 +63,54 @@ info:
       target: '@java.version@'
 server:
   port: 8082
-service:
   shutdown:
-    graceful
+    graceful # see also spring.lifecycle.timeout-per-shutdown-phase=1m
 spring:
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: "off"
+    log-startup-info: true
   lifecycle:
     timeout-per-shutdown-phase: "30s"
   thymeleaf:
     check-template-location: false # to prevent warning
+  security:
+    user:
+      name: ${ADMIN_USER:admin}
+      password: ${ADMIN_PASSWORD:admin}
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://192.168.1.149:8282/realms/dionext
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://192.168.1.149:8282/realms/dionext
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: dionext-client
+            client-secret: OXqaLvZV4aDfbmn4w6Kvk6tIXRBTCDPZ
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+
+keycloak:
+  enabled: false
+  #boot:
+  #  admin:
+  #    client:
+  #      url: http://localhost:8086
+  #      instance:
+  #        name: dio-ms-app
+  #        service-host-type: ip
+  #      enabled: true
 logging:
   level:
     com:
       zaxxer:
         hikari: OFF # suppress errors in log when DatabaseStartupValidator trying to connect to database
-
+    #org.springframework.security: TRACE # for trace spring  security
 
 # Web-sites config
 web-config:
@@ -57,6 +136,7 @@ web-config:
         key: "dioportal.site.description"
       siteTitle:
         key: "dioportal.site.title"
+      googleTagID: "G-GD83XCL778"
       nav:
         - item:
           key: "dioportal.menu.home"
@@ -131,12 +211,12 @@ web-config:
             - item:
               name: "Monitoring"
               url: "devops-monitoring.htm"
-        - item:
-          name: "Free products"
-          subitems:
-            - item:
-              name: "Site starter"
-              url: "lib-site-spring-starter.htm"
+        #- item:
+        #  name: "Free products"
+        #  subitems:
+        #    - item:
+        #      name: "Site starter"
+        #      url: "lib-site-spring-starter.htm"
         - item:
           key: "dioportal.menu.about.project"
           url: "about.htm"

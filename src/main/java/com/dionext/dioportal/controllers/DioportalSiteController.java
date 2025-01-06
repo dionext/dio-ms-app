@@ -3,11 +3,9 @@ package com.dionext.dioportal.controllers;
 
 import com.dionext.dioportal.services.DioportalPageCreatorService;
 import com.dionext.site.controllers.BaseSiteController;
-import com.dionext.site.dto.OfflinePage;
-import com.dionext.site.dto.SrcPageContent;
-import com.dionext.site.services.OfflineSiteService;
-import com.dionext.site.services.PageCreatorService;
+import com.dionext.site.dto.PageUrl;
 import com.dionext.site.services.PageParserService;
+import com.dionext.site.services.SitemapService;
 import com.dionext.utils.exceptions.DioRuntimeException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +31,14 @@ import java.util.List;
 @RequestMapping(value = {"/dioportal"})
 public class DioportalSiteController extends BaseSiteController {
     private DioportalPageCreatorService dioportalPageElementService;
-    private OfflineSiteService offlineSiteService;
+    private SitemapService sitemapService;
 
     private PageParserService pageParserService;
+    @Autowired
+    public void setSitemapService(SitemapService sitemapService) {
+        this.sitemapService = sitemapService;
+    }
+
     @Autowired
     public void setPageParserService(PageParserService pageParserService) {
         this.pageParserService = pageParserService;
@@ -44,11 +47,6 @@ public class DioportalSiteController extends BaseSiteController {
     @Autowired
     public void setDioportalPageElementService(DioportalPageCreatorService dioportalPageElementService) {
         this.dioportalPageElementService = dioportalPageElementService;
-    }
-
-    @Autowired
-    public void setOfflineSiteService(OfflineSiteService offlineSiteService) {
-        this.offlineSiteService = offlineSiteService;
     }
 
     @GetMapping(value = {"/**"}, produces = MediaType.TEXT_HTML_VALUE)
@@ -61,13 +59,11 @@ public class DioportalSiteController extends BaseSiteController {
     public ResponseEntity<String> generateOfflinePages() {
         Path outputDir = Path.of("R:\\doc\\sites\\dioportal\\offline");
 
-
-        List<OfflinePage> list = offlineSiteService.findAllPages(pageInfo.getSiteStoragePaths(),
-                "en", "en");
+        List<PageUrl> list = dioportalPageElementService.findAllPages();
         String base = "http://localhost:8080/dioportal/en/";
         for (var offlinePage : list) {
-            log.debug("" + offlinePage.getRelativePath());
-            String p = offlineSiteService.downloadPage(base, offlinePage, true);
+            log.debug(offlinePage.getRelativePath());
+            String p = sitemapService.downloadPage(base, offlinePage, true);
             Path path = outputDir.resolve(offlinePage.getRelativePath());
             try {
                 File file = path.toFile();
@@ -80,5 +76,15 @@ public class DioportalSiteController extends BaseSiteController {
 
         return sendOk("OK");
     }
+
+    @GetMapping(value = {"/api/test"}, produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> apitest() {
+        return sendOk("OK api test ");
+    }
+    @GetMapping(value = {"/admin/test"}, produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> admintest() {
+        return sendOk("OK admin test ");
+    }
+
 
 }
