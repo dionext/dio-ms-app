@@ -47,6 +47,13 @@
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 			<version>3.2.3</version>
 		</dependency>
+
+		<!-- faker data generator for examples -->
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
