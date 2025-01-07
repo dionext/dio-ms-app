@@ -1,8 +1,7 @@
 package com.dionext.dioportal.services;
 
-import com.dionext.configuration.CacheConfiguration;
+import com.dionext.dioportal.configuration.CacheConfiguration;
 import com.dionext.site.dto.PageUrl;
-import com.dionext.site.services.PageParserService;
 import com.dionext.site.services.SitemapService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

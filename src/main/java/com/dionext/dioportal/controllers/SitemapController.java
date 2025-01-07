@@ -54,9 +54,9 @@ public class SitemapController extends BaseSiteController {
      * @param params
      * @return
      */
-    @GetMapping("/**")
-    public ResponseEntity<String> all(@RequestParam Map<String,String> params) {
-        return sendOk("");
-    }
+    //@GetMapping("/**")
+    //public ResponseEntity<String> all(@RequestParam Map<String,String> params) {
+      //  return sendOk("");
+   // }
 
 }

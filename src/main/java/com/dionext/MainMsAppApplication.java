@@ -16,8 +16,9 @@ import java.util.Locale;
 
 //@SpringBootApplication(exclude = {SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class})
 @ComponentScan
-@ComponentScan(basePackages = "com.dionext.utils")
-@ComponentScan(basePackages = "com.dionext.site")
+//@ComponentScan(basePackages = "com.dionext.utils")
+//@ComponentScan(basePackages = "com.dionext.site")
+@ComponentScan(basePackages = "com.dionext")
 @Slf4j
 @EnableCaching
 public class MainMsAppApplication implements ApplicationRunner {

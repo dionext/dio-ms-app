@@ -1,5 +1,6 @@
-package com.dionext.configuration;
+package com.dionext.dioportal.configuration;
 
+import com.dionext.configuration.BaseCacheConfiguration;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
 import org.springframework.cache.CacheManager;

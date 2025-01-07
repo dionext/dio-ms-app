@@ -1,4 +1,4 @@
-package com.dionext.configuration;
+package com.dionext.dioportal.configuration;
 
 import jakarta.annotation.Priority;
 import jakarta.servlet.http.HttpServletRequest;

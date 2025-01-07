@@ -99,6 +99,9 @@ logging:
 # Web-sites config
 web-config:
   website:
+    staticPrefixes:
+      - "images"
+      - "media"
     siteLangs: "en"
     siteLangInPath: true
     siteDomain: "dionext.com"

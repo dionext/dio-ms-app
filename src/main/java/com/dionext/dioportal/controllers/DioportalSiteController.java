@@ -49,8 +49,12 @@ public class DioportalSiteController extends BaseSiteController {
         this.dioportalPageElementService = dioportalPageElementService;
     }
 
-    @GetMapping(value = {"/**"}, produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = {"/en/**", "ru/**"}, produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> processPage() {
+        return sendOk(createSimpleSitePage(pageParserService, dioportalPageElementService));
+    }
+    @GetMapping(value = {"/en/index.htm"}, produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> processPage1() {
         return sendOk(createSimpleSitePage(pageParserService, dioportalPageElementService));
     }
 

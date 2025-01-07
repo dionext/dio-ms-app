@@ -1,4 +1,4 @@
-package com.dionext.configuration;
+package com.dionext.dioportal.configuration;
 
 
 
