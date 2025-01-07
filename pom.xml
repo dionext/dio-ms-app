@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.0</version>
+		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dionext</groupId>
@@ -16,19 +16,13 @@
 
 
 	<properties>
-		<java.version>21</java.version>
-		<!--<libMsSpringStarter>1.0.0</libMsSpringStarter>-->
+		<java.version>23</java.version>
 		<libSiteSpringStarter>1.0.0</libSiteSpringStarter>
 		<start-class>com.dionext.MainMsAppApplication</start-class>
 	</properties>
 
 	<dependencies>
 		<!-- dionext dependencies -->
-		<!--<dependency>
-			<groupId>com.dionext</groupId>
-			<artifactId>lib-ms-spring-starter</artifactId>
-			<version>${libMsSpringStarter}</version>
-		</dependency>-->
 		<dependency>
 			<groupId>com.dionext</groupId>
 			<artifactId>lib-site-spring-starter</artifactId>
