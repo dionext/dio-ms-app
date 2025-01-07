@@ -9,19 +9,10 @@ spring:
     user:
       name: ${ADMIN_USER:admin}
       password: ${ADMIN_PASSWORD:admin}
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://192.168.1.149:8282/realms/dionext
-      client:
-        provider:
-          keycloak:
-            issuer-uri: http://192.168.1.149:8282/realms/dionext
-            user-name-attribute: preferred_username
-        registration:
-          keycloak:
-            client-id: dionext-client
-            client-secret: OXqaLvZV4aDfbmn4w6Kvk6tIXRBTCDPZ
-            authorization-grant-type: authorization_code
-            scope:
-              - openid
+
+web-config:
+    siteStaticStoragePath: "file:/mnt/disk2/sites/dioportal/input"
+    siteStoragePaths:
+      - "file:/mnt/disk2/sites/dioportal/input"
+    siteInternalStoragePaths:
+      - "file:/mnt/disk2/sites/dioportal/mediainfo"
