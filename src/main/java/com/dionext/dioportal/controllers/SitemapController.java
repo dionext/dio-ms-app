@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 @Tag(name = "Sitemap Controller", description = "Sitemap Controller")
-@RequestMapping(value = {"/dioportal"})
+@RequestMapping(value = {"/"})
 public class SitemapController extends BaseSiteController {
 
     DioportalSitemapService dioportalSitemapService;

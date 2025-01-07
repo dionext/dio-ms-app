@@ -78,22 +78,6 @@ spring:
     user:
       name: ${ADMIN_USER:admin}
       password: ${ADMIN_PASSWORD:admin}
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://192.168.1.149:8282/realms/dionext
-      client:
-        provider:
-          keycloak:
-            issuer-uri: http://192.168.1.149:8282/realms/dionext
-            user-name-attribute: preferred_username
-        registration:
-          keycloak:
-            client-id: dionext-client
-            client-secret: OXqaLvZV4aDfbmn4w6Kvk6tIXRBTCDPZ
-            authorization-grant-type: authorization_code
-            scope:
-              - openid
 
 keycloak:
   enabled: false
@@ -115,109 +99,106 @@ logging:
 # Web-sites config
 web-config:
   website:
+    siteLangs: "en"
+    siteLangInPath: true
+    siteDomain: "dionext.com"
     siteProtocol: "https"
-  multiSites:
-    dioportal:
-      siteLangs: "en"
-      siteLangInPath: true
-      siteDomain: "dionext.com"
-      siteProtocol: "https"
-      siteStaticStoragePath: "file:/mnt/sites/dioportal/input"
-      siteStoragePaths:
-        - "file:/mnt/sites/dioportal/input"
-      siteInternalStoragePaths:
-        - "file:/mnt/sites/dioportal/mediainfo"
-      createMetaOg: true
-      createMetaForIcons: true
-      useExternalUrlForImages: false
-      keywords:
-        key: "dioportal.site.keywords"
-      description:
-        key: "dioportal.site.description"
-      siteTitle:
-        key: "dioportal.site.title"
-      googleTagID: "G-GD83XCL778"
-      nav:
-        - item:
-          key: "dioportal.menu.home"
-          url: "index.htm"
-        - item:
-          name: "Architecture"
-          url: "index.htm#architecture"
-          subitems:
-            - item:
-              name: "Principles and rules"
-              url: "software-development-principles.htm"
-            - item:
-              name: "Microservices"
-              url: "architecture-microservices.htm"
-        - item:
-          name: "Development"
-          url: "index.htm#development"
-          subitems:
-            - item:
-              name: "Tools"
-              url: "index.htm#tools"
-            - item:
-              name: "Java"
-              url: "index.htm#java"
-            - item:
-              name: "Spring"
-              url: "index.htm#spring"
-            - item:
-              name: "Web"
-              url: "index.htm#web"
-            - item:
-              name: "Texts and Media"
-              url: "index.htm#texts"
-            - item:
-              name: "Data"
-              url: "index.htm#data"
-            - item:
-              name: "Integration"
-              url: "integration-technologies.htm"
-            - item:
-              name: "Testing"
-              url: "testing-and-debugging.htm"
-            - item:
-              name: "Profiling"
-              url: "java-profiling.htm"
-        - item:
-          name: "Devops"
-          url: "index.htm#deployment"
-          subitems:
-            - item:
-              name: "Devops"
-              url: "devops.htm"
-            - item:
-              name: "Remote delivery"
-              url: "devops-remote-operations.htm"
-            - item:
-              name: "Linux"
-              url: "os-linux.htm"
-            - item:
-              name: "Git"
-              url: "devops-git.htm"
-            - item:
-              name: "Runtime"
-              url: "index.htm#runtime"
-        - item:
-          name: "Maintenance"
-          url: "index.htm#maintenance."
-          subitems:
-            - item:
-              name: "Logging"
-              url: "devops-logging.htm"
-            - item:
-              name: "Monitoring"
-              url: "devops-monitoring.htm"
-        #- item:
-        #  name: "Free products"
-        #  subitems:
-        #    - item:
-        #      name: "Site starter"
-        #      url: "lib-site-spring-starter.htm"
-        - item:
-          key: "dioportal.menu.about.project"
-          url: "about.htm"
+    siteStaticStoragePath: "file:/mnt/sites/dioportal/input"
+    siteStoragePaths:
+      - "file:/mnt/sites/dioportal/input"
+    siteInternalStoragePaths:
+      - "file:/mnt/sites/dioportal/mediainfo"
+    createMetaOg: true
+    createMetaForIcons: true
+    useExternalUrlForImages: false
+    keywords:
+      key: "dioportal.site.keywords"
+    description:
+      key: "dioportal.site.description"
+    siteTitle:
+      key: "dioportal.site.title"
+    googleTagID: "G-GD83XCL778"
+    nav:
+      - item:
+        key: "dioportal.menu.home"
+        url: "index.htm"
+      - item:
+        name: "Architecture"
+        url: "index.htm#architecture"
+        subitems:
+          - item:
+            name: "Principles and rules"
+            url: "software-development-principles.htm"
+          - item:
+            name: "Microservices"
+            url: "architecture-microservices.htm"
+      - item:
+        name: "Development"
+        url: "index.htm#development"
+        subitems:
+          - item:
+            name: "Tools"
+            url: "index.htm#tools"
+          - item:
+            name: "Java"
+            url: "index.htm#java"
+          - item:
+            name: "Spring"
+            url: "index.htm#spring"
+          - item:
+            name: "Web"
+            url: "index.htm#web"
+          - item:
+            name: "Texts and Media"
+            url: "index.htm#texts"
+          - item:
+            name: "Data"
+            url: "index.htm#data"
+          - item:
+            name: "Integration"
+            url: "integration-technologies.htm"
+          - item:
+            name: "Testing"
+            url: "testing-and-debugging.htm"
+          - item:
+            name: "Profiling"
+            url: "java-profiling.htm"
+      - item:
+        name: "Devops"
+        url: "index.htm#deployment"
+        subitems:
+          - item:
+            name: "Devops"
+            url: "devops.htm"
+          - item:
+            name: "Remote delivery"
+            url: "devops-remote-operations.htm"
+          - item:
+            name: "Linux"
+            url: "os-linux.htm"
+          - item:
+            name: "Git"
+            url: "devops-git.htm"
+          - item:
+            name: "Runtime"
+            url: "index.htm#runtime"
+      - item:
+        name: "Maintenance"
+        url: "index.htm#maintenance."
+        subitems:
+          - item:
+            name: "Logging"
+            url: "devops-logging.htm"
+          - item:
+            name: "Monitoring"
+            url: "devops-monitoring.htm"
+      #- item:
+      #  name: "Free products"
+      #  subitems:
+      #    - item:
+      #      name: "Site starter"
+      #      url: "lib-site-spring-starter.htm"
+      - item:
+        key: "dioportal.menu.about.project"
+        url: "about.htm"
 
