@@ -28,7 +28,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Tag(name = "Dioportal Site Controller", description = "Dioportal Site Controller")
-@RequestMapping(value = {"/dioportal"})
+@RequestMapping(value = {"/"})
 public class DioportalSiteController extends BaseSiteController {
     private DioportalPageCreatorService dioportalPageElementService;
     private SitemapService sitemapService;
@@ -60,7 +60,7 @@ public class DioportalSiteController extends BaseSiteController {
         Path outputDir = Path.of("R:\\doc\\sites\\dioportal\\offline");
 
         List<PageUrl> list = dioportalPageElementService.findAllPages();
-        String base = "http://localhost:8080/dioportal/en/";
+        String base = "http://localhost:8080/en/";
         for (var offlinePage : list) {
             log.debug(offlinePage.getRelativePath());
             String p = sitemapService.downloadPage(base, offlinePage, true);
