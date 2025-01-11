@@ -13,6 +13,14 @@ import java.text.MessageFormat;
 public class DioportalPageCreatorService extends PageCreatorService {
 
     @Override
+    public String createBodyBottomInformation() {
+        String s = getVersionInformation();
+        return MessageFormat.format("""
+                <small class="d-block mb-3 text-muted">&copy; 2023-2025 v 1.2 {0}</small>""",
+                dfs(getVersionInformation())) ;
+    }
+
+    @Override
     public String createHeadBottom() {
         return dfs(super.createHeadBottom()) + """
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"/>

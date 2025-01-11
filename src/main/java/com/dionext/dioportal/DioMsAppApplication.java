@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class MainMsAppApplication {
+public class DioMsAppApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MainMsAppApplication.class, args);
+        SpringApplication.run(DioMsAppApplication.class, args);
     }
 
 }
