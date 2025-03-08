@@ -6,11 +6,13 @@ import com.dionext.site.controllers.BaseSiteController;
 import com.dionext.site.dto.PageUrl;
 import com.dionext.site.services.PageParserService;
 import com.dionext.site.services.SitemapService;
+import com.dionext.utils.FmMarkdownUtils;
 import com.dionext.utils.exceptions.DioRuntimeException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,9 @@ import java.util.List;
 public class DioportalSiteController extends BaseSiteController {
     private DioportalPageCreatorService dioportalPageElementService;
     private SitemapService sitemapService;
+
+
+
 
     private PageParserService pageParserService;
     @Autowired
@@ -59,26 +64,10 @@ public class DioportalSiteController extends BaseSiteController {
     }
 
 
-    @GetMapping(value = {"/api/generateOfflinePages"}, produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = {"/admin/generateOfflinePages"}, produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> generateOfflinePages() {
-        Path outputDir = Path.of("R:\\doc\\sites\\dioportal\\offline");
-
-        List<PageUrl> list = dioportalPageElementService.findAllPages();
-        String base = "http://localhost:8080/en/";
-        for (var offlinePage : list) {
-            log.debug(offlinePage.getRelativePath());
-            String p = sitemapService.downloadPage(base, offlinePage, true);
-            Path path = outputDir.resolve(offlinePage.getRelativePath());
-            try {
-                File file = path.toFile();
-                if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
-                Files.writeString(path, p);
-            } catch (IOException e) {
-                throw new DioRuntimeException();
-            }
-        }
-
-        return sendOk("OK");
+        int filesCount = dioportalPageElementService.generateOfflinePages(true);
+        return sendOk("OK. Generated " + filesCount + " files");
     }
 
     @GetMapping(value = {"/api/test"}, produces = MediaType.TEXT_HTML_VALUE)

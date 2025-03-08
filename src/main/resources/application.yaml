@@ -78,7 +78,8 @@ spring:
     user:
       name: ${ADMIN_USER:admin}
       password: ${ADMIN_PASSWORD:admin}
-
+  codec:
+    max-in-memory-size: 1024KB
 keycloak:
   enabled: false
   #boot:
