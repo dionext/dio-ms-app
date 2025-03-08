@@ -14,7 +14,6 @@ public class DioportalPageCreatorService extends PageCreatorService {
 
     @Override
     public String createBodyBottomInformation() {
-        String s = getVersionInformation();
         return MessageFormat.format("""
                 <small class="d-block mb-3 text-muted">&copy; 2023-2025 v 1.2 {0}</small>""",
                 dfs(getVersionInformation())) ;

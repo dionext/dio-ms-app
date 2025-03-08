@@ -35,13 +35,13 @@ public class SitemapController extends BaseSiteController {
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_XML_VALUE + "; charset=utf-8");
-        return new ResponseEntity(dioportalSitemapService.createSitemap(false), responseHeaders, HttpStatus.OK);
+        return new ResponseEntity<String>(dioportalSitemapService.createSitemap(false), responseHeaders, HttpStatus.OK);
     }
     @GetMapping("/robots.txt")
     public ResponseEntity<String> robots(@RequestParam Map<String,String> params) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + "; charset=utf-8");
-        return new ResponseEntity(MessageFormat.format("""
+        return new ResponseEntity<String>(MessageFormat.format("""
                 User-agent: *
                 Disallow: /admin/
                 Disallow: /api/

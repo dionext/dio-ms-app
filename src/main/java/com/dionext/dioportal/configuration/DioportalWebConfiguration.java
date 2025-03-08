@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Configuration
-public class WebConfiguration {
+public class DioportalWebConfiguration {
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();

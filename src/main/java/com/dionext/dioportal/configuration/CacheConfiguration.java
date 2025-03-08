@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@SuppressWarnings({"java:S1604", "unchecked"})
+@SuppressWarnings({"java:S1604"})
 public class CacheConfiguration extends BaseCacheConfiguration {
 
     ///////////////////////////////////////

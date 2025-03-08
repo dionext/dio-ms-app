@@ -3,27 +3,17 @@ package com.dionext.dioportal.controllers;
 
 import com.dionext.dioportal.services.DioportalPageCreatorService;
 import com.dionext.site.controllers.BaseSiteController;
-import com.dionext.site.dto.PageUrl;
 import com.dionext.site.services.PageParserService;
 import com.dionext.site.services.SitemapService;
-import com.dionext.utils.FmMarkdownUtils;
-import com.dionext.utils.exceptions.DioRuntimeException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 
 
 @RestController
@@ -33,15 +23,9 @@ import java.util.List;
 @RequestMapping(value = {"/"})
 public class DioportalSiteController extends BaseSiteController {
     private DioportalPageCreatorService dioportalPageElementService;
-    private SitemapService sitemapService;
-
-
-
-
     private PageParserService pageParserService;
     @Autowired
     public void setSitemapService(SitemapService sitemapService) {
-        this.sitemapService = sitemapService;
     }
 
     @Autowired
