@@ -66,6 +66,40 @@ server:
   shutdown:
     graceful # see also spring.lifecycle.timeout-per-shutdown-phase=1m
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+  mail:
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  ai:
+    openai:
+      api-key: "UNIT_TEST_KEY"
+    retry:
+      max-attempts: 10  #Maximum number of retry attempts. 10
+      backoff:
+        initial-interval: 2  #Initial sleep duration for the exponential backoff policy. 2 sec
+        multiplier: 5 #  Backoff interval multiplier.
+        max-interval: 3 #  Maximum backoff duration. 3 min.
+      on-client-errors: false #  If false, throw a NonTransientAiException, and do not attempt retry for 4xx client error codes  false
+      exclude-on-http-codes: # List of HTTP status codes that should not trigger a retry (e.g. to throw NonTransientAiException). empty
+      on-http-codes: #List of HTTP status codes that should trigger a retry (e.g. to throw TransientAiException). empty
+
   main:
     allow-bean-definition-overriding: true
     banner-mode: "off"
@@ -74,28 +108,39 @@ spring:
     timeout-per-shutdown-phase: "30s"
   thymeleaf:
     check-template-location: false # to prevent warning
-  security:
-    user:
-      name: ${ADMIN_USER:admin}
-      password: ${ADMIN_PASSWORD:admin}
   codec:
     max-in-memory-size: 1024KB
-keycloak:
-  enabled: false
-  #boot:
-  #  admin:
-  #    client:
-  #      url: http://localhost:8086
-  #      instance:
-  #        name: dio-ms-app
-  #        service-host-type: ip
-  #      enabled: true
+  #database
+  datasource:
+    url: jdbc:mariadb://${DATABASE_ADDRESS}?useSSL=false&allowMultiQueries=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+    username: ${MYSQL_USER:}
+    password: ${MYSQL_PASSWORD:}
+    continue-on-error: true # not working
+  jpa:
+    open-in-view: false #to prevent warning
+    show-sql: true
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      #for auto update database (! use carefully)
+      ddl-auto: update
+    properties:
+      hibernate:
+  # for database migrations
+  flyway:
+    baseline-on-migrate: true
+    #baseline-version: '0'
 logging:
   level:
     com:
       zaxxer:
         hikari: OFF # suppress errors in log when DatabaseStartupValidator trying to connect to database
-    #org.springframework.security: TRACE # for trace spring  security
+    org:
+      springframework:
+        retry:
+          support:
+            RetryTemplate: TRACE
 
 # Web-sites config
 web-config:
