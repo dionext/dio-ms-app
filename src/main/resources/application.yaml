@@ -120,9 +120,9 @@ spring:
     open-in-view: false #to prevent warning
     show-sql: true
     hibernate:
-      naming:
-        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      #naming:
+      #  implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      #  physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       #for auto update database (! use carefully)
       ddl-auto: update
     properties:
